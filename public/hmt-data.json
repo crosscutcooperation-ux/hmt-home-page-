@@ -1,0 +1,49 @@
+{
+  "steps": [
+    {
+      "title": "Site Survey",
+      "description": "Land, utilities, existing assets and constraints measured before a line is drawn.",
+      "index": 0
+    },
+    {
+      "title": "Engineering & Planning",
+      "description": "Layouts, load studies, timelines and method statements locked with stakeholders.",
+      "index": 1
+    },
+    {
+      "title": "Procurement",
+      "description": "OEM equipment, long-lead items and approved vendors brought under one schedule.",
+      "index": 2
+    },
+    {
+      "title": "Manufacturing & Fabrication",
+      "description": "Structures, skids and custom assemblies built to the approved drawings.",
+      "index": 3
+    },
+    {
+      "title": "Logistics & Packaging",
+      "description": "Export-grade packing, lifting plans and route surveys for heavy machines.",
+      "index": 4
+    },
+    {
+      "title": "Installation & Erection",
+      "description": "Cranes, alignment, grouting and mechanical completion on the plant floor.",
+      "index": 5
+    },
+    {
+      "title": "Automation & Commissioning",
+      "description": "PLC, drives, instrumentation and interlocks proven against the control narrative.",
+      "index": 6
+    },
+    {
+      "title": "Trial Production",
+      "description": "Supervised runs until rate, quality and safety gates are met.",
+      "index": 7
+    },
+    {
+      "title": "Handover & Support",
+      "description": "Documentation, training and a team that stays through ramp-up.",
+      "index": 8
+    }
+  ]
+}

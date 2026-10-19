@@ -1,0 +1,16 @@
+{
+  "name": "hmt-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "check": "node --check public/app.js && node --check public/motion.js"
+  },
+  "dependencies": {
+    "html-react-parser": "5.2.10",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}
