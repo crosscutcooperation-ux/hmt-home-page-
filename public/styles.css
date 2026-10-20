@@ -82,3 +82,13 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}.hmt-site{margin:0;backgroun
 @media(max-width:1100px){.greenfield-flow{height:480px}.hmt-site .why-with-stories .why-list.story-accordion{height:420px;gap:8px}.hmt-site .why-with-stories .story-card.active .story-title{font-size:25px}.why-with-stories .story-card.active .story-content{left:20px;right:20px}.hmt-site .why-with-stories .story-title{font-size:10px}}
 @media(max-width:760px){.greenfield-flow{height:450px}.hmt-site #greenfield-row.curved-track{padding:0 var(--pad);margin:0;gap:5px!important}#greenfield-row .curved-service{flex-basis:72vw;width:72vw}#greenfield-row .service-details{left:20px;right:20px;bottom:78px}.hmt-site #greenfield-row .service-details h3{font-size:23px}.hmt-site #greenfield-row .service-details p{font-size:13px;line-height:1.55}.hmt-site .why-with-stories .why-list.story-accordion{height:390px;gap:7px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-snap-type:x proximity;padding:0 0 8px}.why-with-stories .story-card{flex:0 0 40px;transition:flex-basis .7s var(--ease)}.why-with-stories .story-card.active{flex:0 0 min(74vw,300px)}.why-with-stories .story-content{bottom:22px}.why-with-stories .story-card.active .story-content{left:20px;right:20px;bottom:25px}.hmt-site .why-with-stories .story-card.active .story-title{font-size:25px}.hmt-site .why-with-stories .story-card.active .story-description{font-size:14px}.why-with-stories .story-accordion::-webkit-scrollbar{display:none}}
 @media(prefers-reduced-motion:reduce){.why-with-stories .story-card,.why-with-stories .story-trigger img{transition:none}.hmt-site .why-with-stories .story-card.active .story-description{animation:none}}
+
+/* More pronounced Greenfield arc; all horizontal galleries track wheel and pointer input smoothly. */
+.greenfield-flow{height:600px}
+.greenfield-flow .arc-top{height:160px}
+.greenfield-flow .arc-bottom{height:230px;bottom:-70px}
+.hmt-site #greenfield-row .service-details{bottom:174px}
+.hmt-site #greenfield-row.curved-track,.hmt-site #brownfield-row,.hmt-site #industry-row{scroll-snap-type:none}
+@media(min-width:1700px){.greenfield-flow{height:660px}}
+@media(max-width:1100px){.greenfield-flow{height:540px}.greenfield-flow .arc-top{height:135px}.greenfield-flow .arc-bottom{height:195px;bottom:-62px}.hmt-site #greenfield-row .service-details{bottom:148px}}
+@media(max-width:760px){.greenfield-flow{height:480px}.greenfield-flow .arc-top{height:115px}.greenfield-flow .arc-bottom{height:170px;bottom:-50px}.hmt-site #greenfield-row .service-details{bottom:135px}}

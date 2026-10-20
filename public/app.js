@@ -43,6 +43,33 @@
  $$('[data-process]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.process==='0'));button.classList.toggle('selected',button.dataset.process==='0');button.addEventListener('click',()=>{processManual=true;clearInterval(processTimer);processStep(Number(button.dataset.process));});});
  if(!reduced){const processObserver=new IntersectionObserver(entries=>{if(!entries.some(entry=>entry.isIntersecting))return;processObserver.disconnect();if(processManual)return;let index=0;processTimer=setInterval(()=>{if(processManual||++index>=9){clearInterval(processTimer);return;}processStep(index);},700);},{rootMargin:'-20% 0px'});processObserver.observe($('#process'));}
  $$('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{const [id,direction]=button.dataset.scroll.split(':');const row=$(`#${id}`);row.scrollBy({left:row.clientWidth*.78*Number(direction),behavior:reduced?'instant':'smooth'});}));
+ const horizontalRows=['greenfield-row','brownfield-row','industry-row'].map(id=>$(`#${id}`)).concat($('#why-hmt .story-accordion')).filter(Boolean);
+ const rowMax=row=>Math.max(0,row.scrollWidth-row.clientWidth);
+ const rowInScrollZone=row=>{const rect=row.getBoundingClientRect();return rect.top<innerHeight*.54&&rect.bottom>innerHeight*.46;};
+ window.addEventListener('wheel',event=>{
+   if(event.defaultPrevented||event.ctrlKey||event.shiftKey||survey.open||Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
+   const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
+   const row=horizontalRows.find(candidate=>rowMax(candidate)>2&&rowInScrollZone(candidate));
+   if(!row)return;
+   const max=rowMax(row);
+   if(delta>0&&row.scrollLeft>=max-2||delta<0&&row.scrollLeft<=2){
+     event.preventDefault();
+     window.scrollBy({top:delta,behavior:'instant'});
+     return;
+   }
+   event.preventDefault();
+   row.scrollLeft=Math.max(0,Math.min(max,row.scrollLeft+delta));
+ },{passive:false});
+ horizontalRows.forEach(row=>{
+   let lastX=null;
+   row.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')lastX=event.clientX;});
+   row.addEventListener('pointermove',event=>{
+     if(event.pointerType!=='mouse'||lastX===null)return;
+     const delta=event.clientX-lastX;lastX=event.clientX;
+     if(Math.abs(delta)>1)row.scrollLeft=Math.max(0,Math.min(rowMax(row),row.scrollLeft+delta*2.5));
+   });
+   row.addEventListener('pointerleave',()=>{lastX=null;});
+ });
  $$('[data-industry]').forEach(button=>button.addEventListener('click',()=>{const index=Number(button.dataset.industry);$$('[data-industry]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));$$('.industry-panel').forEach((panel,i)=>panel.hidden=i!==index);const panel=$(`#industry-panel-${index}`);if(!reduced)panel.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:350,easing:ease});}));
  const storyButtons=$$('#why-hmt [data-story]');
  function openStory(button,center=false){
