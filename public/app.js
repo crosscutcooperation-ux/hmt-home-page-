@@ -5,8 +5,7 @@
  const ease='cubic-bezier(.22,1,.36,1)';
  const survey=$('#survey-dialog'),header=$('#site-header'),mobile=$('#mobile-menu'),menu=$('#menu-trigger');
  const scrollTo=el=>el?.scrollIntoView({behavior:reduced?'instant':'smooth',block:'start'});
- let processData=[],intent='Quote';
- fetch('./hmt-data.json').then(r=>r.json()).then(data=>{processData=data.steps;window.hmtReady=true;}).catch(()=>{window.hmtReady=true;});
+ window.hmtReady=true;
  // Original HMT destinations remain visible and clickable, without leaving this homepage.
  document.addEventListener('click',event=>{
    const link=event.target.closest('a[data-noop]');if(link){event.preventDefault();return;}
@@ -35,13 +34,33 @@
  $$('[data-project-type]').forEach(button=>button.addEventListener('click',()=>{const selected=button.getAttribute('aria-pressed')!=='true';$$('[data-project-type]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});if(selected){button.classList.add('selected');button.setAttribute('aria-pressed','true');}}));
  const status=(form,message,error=false)=>{let el=$('.preview-status',form);if(!el){el=document.createElement('p');el.className='preview-status';el.setAttribute('role','status');form.append(el);}el.textContent=message;el.style.color=error?'#dc2626':'#4f4f4f';};
  $('#survey-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;const data=new FormData(form);if(!String(data.get('name')||'').trim()||String(data.get('phone')||'').replace(/\D/g,'').length<10){status(form,'Please enter your name and a valid phone number.',true);return;}const email=$('[name="email"]',form);if(email.value&&!email.checkValidity()){email.reportValidity();return;}status(form,'Preview only — your free site survey request has not been sent.');});
- const intents=['Site Visit','Project Consultation','Emergency Machine Relocation','Quote'];
- $$('[data-intent]').forEach((button,i)=>button.addEventListener('click',()=>{intent=intents[i];$('#enquiry-intent').textContent=intent;$$('[data-intent]').forEach((b,j)=>b.classList.toggle('selected',j===i));if(i===2)$('#enquiry-form [name="projectType"]').value='Brownfield';scrollTo($('#contact-form'));}));
- $('#enquiry-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;status(form,'Preview only — your enquiry has not been sent.');});
- function processStep(index){if(!processData[index])return;const step=processData[index];$$('[data-process]').forEach(button=>{const i=Number(button.dataset.process);button.classList.toggle('selected',i===index);button.classList.toggle('completed',i<index);button.setAttribute('aria-pressed',String(i===index));});$('#process-title').textContent=step.title;$('#process-description').textContent=step.description;const panel=$('.process-panel');panel.firstElementChild.textContent=String(index+1).padStart(2,'0');$$('#process .absolute.bg-accent').forEach(line=>{if(line.classList.contains('h-px'))line.style.width=`${index/8*100}%`;if(line.classList.contains('w-px'))line.style.height=`${index/8*100}%`;line.style.transition=`all .45s ${ease}`;});if(!reduced)panel.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:ease});}
- let processTimer=null,processManual=false;
- $$('[data-process]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.process==='0'));button.classList.toggle('selected',button.dataset.process==='0');button.addEventListener('click',()=>{processManual=true;clearInterval(processTimer);processStep(Number(button.dataset.process));});});
- if(!reduced){const processObserver=new IntersectionObserver(entries=>{if(!entries.some(entry=>entry.isIntersecting))return;processObserver.disconnect();if(processManual)return;let index=0;processTimer=setInterval(()=>{if(processManual||++index>=9){clearInterval(processTimer);return;}processStep(index);},700);},{rootMargin:'-20% 0px'});processObserver.observe($('#process'));}
+ const contactStage=$('#contact-form-stage'),contactForms=$$('[data-contact-form]'),intentButtons=$$('[data-intent]');
+ let currentIntent=3,targetIntent=3,flipping=false;
+ function rotateContactForm(){
+   if(flipping||targetIntent===currentIntent)return;
+   if(reduced){contactForms[currentIntent].hidden=true;currentIntent=targetIntent;contactForms[currentIntent].hidden=false;return;}
+   flipping=true;contactStage.classList.remove('is-returning');contactStage.classList.add('is-turning');
+   setTimeout(()=>{
+     contactForms[currentIntent].hidden=true;currentIntent=targetIntent;contactForms[currentIntent].hidden=false;
+     contactStage.classList.add('is-returning');requestAnimationFrame(()=>contactStage.classList.remove('is-turning'));
+     setTimeout(()=>{contactStage.classList.remove('is-returning');flipping=false;rotateContactForm();},510);
+   },380);
+ }
+ function selectIntent(index,showForm=true){
+   targetIntent=index;intentButtons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));rotateContactForm();
+   if(showForm)scrollTo($('#contact-form'));
+ }
+ intentButtons.forEach((button,index)=>button.addEventListener('click',()=>selectIntent(index)));
+ contactForms.forEach(form=>form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;status(form,'Preview only — your enquiry has not been sent.');}));
+ if(!reduced){
+   document.body.classList.add('motion-ready');
+   const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('is-in-view',entry.isIntersecting)),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+   ['#divisions','#process'].forEach(selector=>{const section=$(selector);if(section)revealObserver.observe(section);});
+ }
+ const footer=$('footer.hmt-footer'),footerTape=footer?.previousElementSibling;
+ const footerLogo=footer?.querySelector('img[src*="logo-hmt-light.png"]');
+ if(footerLogo)footerLogo.src='./assets/hmt/logo-hmt.png';
+ if(footerTape?.textContent?.includes('Safety First')){footer.after(footerTape);footerTape.classList.add('footer-safety-tail');}
  $$('[data-project-index]').forEach(button=>button.addEventListener('click',()=>{
    const index=Number(button.dataset.projectIndex);
    $$('[data-project-index]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
@@ -56,7 +75,7 @@
  projectDialog.addEventListener('click',event=>{if(event.target===projectDialog)projectDialog.close();});
 
  const wheel=$('#greenfield-wheel'),wheelCards=$$('[data-wheel-card]',wheel);
- let wheelFrame=0,wheelStarted=false,wheelPointerX=null;
+ let wheelFrame=0,wheelStarted=false;
  const paintWheelCurve=()=>{
    const center=wheel.scrollLeft+wheel.clientWidth/2;
    wheelCards.forEach(card=>{
@@ -79,19 +98,11 @@
  wheel.addEventListener('scroll',paintWheelCurve,{passive:true});
  window.addEventListener('resize',paintWheelCurve,{passive:true});
  if(!reduced){const wheelObserver=new IntersectionObserver(entries=>{if(!entries.some(entry=>entry.isIntersecting)||wheelStarted)return;wheelStarted=true;wheelObserver.disconnect();animateWheelTo(0,3200);},{threshold:.25});wheelObserver.observe(wheel);}
- wheel.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')wheelPointerX=event.clientX;});
- wheel.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||wheelPointerX===null)return;const delta=event.clientX-wheelPointerX;wheelPointerX=event.clientX;if(Math.abs(delta)>1){wheelStarted=true;cancelAnimationFrame(wheelFrame);wheel.scrollLeft+=delta*2.1;}});
- wheel.addEventListener('pointerleave',()=>{wheelPointerX=null;});
  $$('[data-wheel-step]').forEach(button=>button.addEventListener('click',()=>{wheelStarted=true;animateWheelTo(wheel.scrollLeft+Number(button.dataset.wheelStep)*wheelCards[0].offsetWidth*.95,650);}));
- wheelCards.forEach(card=>card.addEventListener('click',()=>{wheelStarted=true;animateWheelTo(card.offsetLeft+card.offsetWidth/2-wheel.clientWidth/2,700);}));
  wheel.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();wheelStarted=true;animateWheelTo(wheel.scrollLeft+(event.key==='ArrowRight'?1:-1)*wheelCards[0].offsetWidth,600);}});
 
  $$('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{const [id,direction]=button.dataset.scroll.split(':');const row=$(`#${id}`);row?.scrollBy({left:row.clientWidth*.78*Number(direction),behavior:reduced?'instant':'smooth'});}));
  ['#brownfield-row','#why-hmt .story-accordion'].map(selector=>$(selector)).filter(Boolean).forEach(row=>{
-   let lastX=null;
-   row.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')lastX=event.clientX;});
-   row.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||lastX===null)return;const delta=event.clientX-lastX;lastX=event.clientX;if(Math.abs(delta)>1)row.scrollLeft+=delta*2.2;});
-   row.addEventListener('pointerleave',()=>{lastX=null;});
    row.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();row.scrollBy({left:(event.key==='ArrowRight'?1:-1)*row.clientWidth*.45,behavior:reduced?'instant':'smooth'});}});
  });
  const industryImage=$('#industry-feature-image'),industryTitle=$('#industry-title'),industrySummary=$('#industry-feature-summary');

@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import parse from 'html-react-parser';
 import Script from 'next/script';
 import { ProjectShowcase, GreenfieldWheel, BrownfieldStrip, IndustryCinema } from './sections';
+import ProcessJourney from './journey';
+import ContactDesk from './contact';
 
 const markup = readFileSync(join(process.cwd(), 'content', 'homepage.html'), 'utf8');
 
@@ -11,6 +13,8 @@ export default function HomePage() {
     <>
       {parse(markup, {
         replace(node) {
+          if (node.name === 'section' && node.attribs?.id === 'process') return <ProcessJourney />;
+          if (node.name === 'section' && node.attribs?.id === 'contact') return <ContactDesk />;
           switch (node.attribs?.['data-hmt-slot']) {
             case 'divisions': return <ProjectShowcase />;
             case 'greenfield': return <GreenfieldWheel />;

@@ -75,7 +75,9 @@ export function ProjectShowcase() {
   return (
     <section id="divisions" className="project-showcase hmt-section" aria-labelledby="project-showcase-title">
       <div className="showcase-inner">
-        <h2 id="project-showcase-title">Brownfield. Greenfield. Turnkey Solutions.</h2>
+        <h2 id="project-showcase-title" className="project-written-title" aria-label="Brownfield. Greenfield. Turnkey Solutions.">
+          <span>Brownfield.</span> <span>Greenfield.</span> <span>Turnkey Solutions.</span>
+        </h2>
         <div className="project-layout">
           <div className="project-thumbnails" role="group" aria-label="Choose a project type">
             {projects.map((project, index) => (
@@ -124,11 +126,11 @@ export function GreenfieldWheel() {
       <div className="wheel-stage" id="greenfield-wheel" aria-label="Rotating Greenfield services gallery" tabIndex="0">
         <div className="wheel-track">
           {greenfieldServices.map(([title, image], index) => (
-            <button key={title} type="button" className="wheel-card" data-wheel-card={index} aria-label={`Show ${title}`}>
+            <div key={title} className="wheel-card" data-wheel-card={index}>
               <img src={asset(image)} alt={title} loading={index < 6 ? 'eager' : 'lazy'} />
               <span className="wheel-card-shade" aria-hidden="true" />
               <span className="wheel-card-title">{title}</span>
-            </button>
+            </div>
           ))}
         </div>
       </div>
