@@ -42,35 +42,66 @@
  let processTimer=null,processManual=false;
  $$('[data-process]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.process==='0'));button.classList.toggle('selected',button.dataset.process==='0');button.addEventListener('click',()=>{processManual=true;clearInterval(processTimer);processStep(Number(button.dataset.process));});});
  if(!reduced){const processObserver=new IntersectionObserver(entries=>{if(!entries.some(entry=>entry.isIntersecting))return;processObserver.disconnect();if(processManual)return;let index=0;processTimer=setInterval(()=>{if(processManual||++index>=9){clearInterval(processTimer);return;}processStep(index);},700);},{rootMargin:'-20% 0px'});processObserver.observe($('#process'));}
- $$('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{const [id,direction]=button.dataset.scroll.split(':');const row=$(`#${id}`);row.scrollBy({left:row.clientWidth*.78*Number(direction),behavior:reduced?'instant':'smooth'});}));
- const horizontalRows=['greenfield-row','brownfield-row','industry-row'].map(id=>$(`#${id}`)).concat($('#why-hmt .story-accordion')).filter(Boolean);
- const rowMax=row=>Math.max(0,row.scrollWidth-row.clientWidth);
- const rowInScrollZone=row=>{const rect=row.getBoundingClientRect();return rect.top<innerHeight*.54&&rect.bottom>innerHeight*.46;};
- window.addEventListener('wheel',event=>{
-   if(event.defaultPrevented||event.ctrlKey||event.shiftKey||survey.open||Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
-   const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
-   const row=horizontalRows.find(candidate=>rowMax(candidate)>2&&rowInScrollZone(candidate));
-   if(!row)return;
-   const max=rowMax(row);
-   if(delta>0&&row.scrollLeft>=max-2||delta<0&&row.scrollLeft<=2){
-     event.preventDefault();
-     window.scrollBy({top:delta,behavior:'instant'});
-     return;
-   }
-   event.preventDefault();
-   row.scrollLeft=Math.max(0,Math.min(max,row.scrollLeft+delta));
- },{passive:false});
- horizontalRows.forEach(row=>{
+ $$('[data-project-index]').forEach(button=>button.addEventListener('click',()=>{
+   const index=Number(button.dataset.projectIndex);
+   $$('[data-project-index]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+   $$('[data-project-panel]').forEach(panel=>{panel.hidden=Number(panel.dataset.projectPanel)!==index;});
+   const image=$('#project-feature-image'),source=$('img',button);
+   image.src=source.src;image.alt=button.getAttribute('aria-label').replace(/^Show /,'');
+   $('[data-open-project-image]').setAttribute('aria-label',`Open full ${image.alt} image`);
+ }));
+ const projectDialog=$('#project-image-dialog');
+ $('[data-open-project-image]').addEventListener('click',()=>{const image=$('#project-feature-image'),full=$('#project-full-image');full.src=image.src;full.alt=image.alt;projectDialog.showModal();});
+ $('[data-close-project-image]').addEventListener('click',()=>projectDialog.close());
+ projectDialog.addEventListener('click',event=>{if(event.target===projectDialog)projectDialog.close();});
+
+ const wheel=$('#greenfield-wheel'),wheelCards=$$('[data-wheel-card]',wheel);
+ let wheelFrame=0,wheelStarted=false,wheelPointerX=null;
+ const paintWheelCurve=()=>{
+   const center=wheel.scrollLeft+wheel.clientWidth/2;
+   wheelCards.forEach(card=>{
+     const position=(card.offsetLeft+card.offsetWidth/2-center)/(wheel.clientWidth/2);
+     const bend=Math.max(-1.6,Math.min(1.6,position)),distance=Math.abs(bend);
+     const lift=30*Math.pow(distance,1.5),yaw=-bend*13,fan=bend*6;
+     card.style.transform=`translate3d(0,${lift}px,0) rotateY(${yaw}deg) rotateZ(${fan}deg) scale(${1-distance*.045})`;
+   });
+ };
+ const animateWheelTo=(destination,duration)=>{
+   cancelAnimationFrame(wheelFrame);
+   if(reduced){wheel.scrollLeft=destination;paintWheelCurve();return;}
+   const start=performance.now(),from=wheel.scrollLeft;
+   const frame=now=>{const t=Math.min(1,(now-start)/duration),eased=1-Math.pow(1-t,4);wheel.scrollLeft=from+(destination-from)*eased;paintWheelCurve();if(t<1)wheelFrame=requestAnimationFrame(frame);};
+   wheelFrame=requestAnimationFrame(frame);
+ };
+ const initialSweep=Math.min(wheel.scrollWidth-wheel.clientWidth,wheelCards[0].offsetWidth*4.5);
+ if(!reduced)wheel.scrollLeft=initialSweep;
+ paintWheelCurve();
+ wheel.addEventListener('scroll',paintWheelCurve,{passive:true});
+ window.addEventListener('resize',paintWheelCurve,{passive:true});
+ if(!reduced){const wheelObserver=new IntersectionObserver(entries=>{if(!entries.some(entry=>entry.isIntersecting)||wheelStarted)return;wheelStarted=true;wheelObserver.disconnect();animateWheelTo(0,3200);},{threshold:.25});wheelObserver.observe(wheel);}
+ wheel.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')wheelPointerX=event.clientX;});
+ wheel.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||wheelPointerX===null)return;const delta=event.clientX-wheelPointerX;wheelPointerX=event.clientX;if(Math.abs(delta)>1){wheelStarted=true;cancelAnimationFrame(wheelFrame);wheel.scrollLeft+=delta*2.1;}});
+ wheel.addEventListener('pointerleave',()=>{wheelPointerX=null;});
+ $$('[data-wheel-step]').forEach(button=>button.addEventListener('click',()=>{wheelStarted=true;animateWheelTo(wheel.scrollLeft+Number(button.dataset.wheelStep)*wheelCards[0].offsetWidth*.95,650);}));
+ wheelCards.forEach(card=>card.addEventListener('click',()=>{wheelStarted=true;animateWheelTo(card.offsetLeft+card.offsetWidth/2-wheel.clientWidth/2,700);}));
+ wheel.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();wheelStarted=true;animateWheelTo(wheel.scrollLeft+(event.key==='ArrowRight'?1:-1)*wheelCards[0].offsetWidth,600);}});
+
+ $$('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{const [id,direction]=button.dataset.scroll.split(':');const row=$(`#${id}`);row?.scrollBy({left:row.clientWidth*.78*Number(direction),behavior:reduced?'instant':'smooth'});}));
+ ['#brownfield-row','#why-hmt .story-accordion'].map(selector=>$(selector)).filter(Boolean).forEach(row=>{
    let lastX=null;
    row.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')lastX=event.clientX;});
-   row.addEventListener('pointermove',event=>{
-     if(event.pointerType!=='mouse'||lastX===null)return;
-     const delta=event.clientX-lastX;lastX=event.clientX;
-     if(Math.abs(delta)>1)row.scrollLeft=Math.max(0,Math.min(rowMax(row),row.scrollLeft+delta*2.5));
-   });
+   row.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||lastX===null)return;const delta=event.clientX-lastX;lastX=event.clientX;if(Math.abs(delta)>1)row.scrollLeft+=delta*2.2;});
    row.addEventListener('pointerleave',()=>{lastX=null;});
+   row.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();row.scrollBy({left:(event.key==='ArrowRight'?1:-1)*row.clientWidth*.45,behavior:reduced?'instant':'smooth'});}});
  });
- $$('[data-industry]').forEach(button=>button.addEventListener('click',()=>{const index=Number(button.dataset.industry);$$('[data-industry]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));$$('.industry-panel').forEach((panel,i)=>panel.hidden=i!==index);const panel=$(`#industry-panel-${index}`);if(!reduced)panel.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:350,easing:ease});}));
+ const industryImage=$('#industry-feature-image'),industryTitle=$('#industry-title'),industrySummary=$('#industry-feature-summary');
+ $$('[data-industry]').forEach(button=>button.addEventListener('click',()=>{
+   $$('[data-industry]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+   industryImage.style.opacity='0';
+   industryImage.src=button.dataset.image;industryImage.alt=button.dataset.title;
+   industryTitle.textContent=button.dataset.title;industrySummary.textContent=button.dataset.summary;
+   industryImage.decode().catch(()=>{}).then(()=>{industryImage.style.opacity='1';});
+ }));
  const storyButtons=$$('#why-hmt [data-story]');
  function openStory(button,center=false){
    storyButtons.forEach(trigger=>{const active=trigger===button;trigger.closest('.story-card').classList.toggle('active',active);trigger.setAttribute('aria-expanded',String(active));});

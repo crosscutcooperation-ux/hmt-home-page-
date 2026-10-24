@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
         <link rel="preload" as="image" href="/assets/hmt/robotic-machines-ig.webp" />
         <link rel="stylesheet" href="/hmt-original.css" />
         <link rel="stylesheet" href="/styles.css" />
+        <link rel="stylesheet" href="/redesign.css" />
       </head>
       <body className="hmt-site">{children}</body>
     </html>
