@@ -71,9 +71,13 @@
    $('.project-main-image').animate([{opacity:0,transform:'perspective(1200px) rotateY(22deg) rotateZ(-3deg) translateY(25px)'},{opacity:1,transform:'perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(0)'}],{duration:1100,easing:ease});
    animateProjectDetails();
  }
- let projectRequest=0;
- $$('[data-project-index]').forEach(button=>button.addEventListener('click',async()=>{
+ let projectRequest=0,currentProject=0,projectPausedUntil=0,projectVisible=false;
+ const projectButtons=$$('[data-project-index]');
+ async function selectProject(button,manual=true){
+   if(manual)projectPausedUntil=performance.now()+6500;
+   if(Number(button.dataset.projectIndex)===currentProject)return;
    const index=Number(button.dataset.projectIndex),request=++projectRequest;
+   currentProject=index;$('#divisions').dataset.projectActive=String(index);
    const image=$('#project-feature-image'),source=$('img',button),frame=$('.project-main-image'),info=$('.project-information');
    $$('[data-project-index]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
    if(!reduced){frame.classList.add('is-switching');info.classList.add('is-switching');}
@@ -84,11 +88,50 @@
    image.src=source.src;image.alt=button.getAttribute('aria-label').replace(/^Show /,'');
    $('[data-open-project-image]').setAttribute('aria-label',`Open full ${image.alt} image`);
    requestAnimationFrame(()=>{frame.classList.remove('is-switching');info.classList.remove('is-switching');animateProjectDetails();});
- }));
+ }
+ projectButtons.forEach(button=>{
+   button.addEventListener('click',()=>selectProject(button));
+   button.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')selectProject(button);});
+   button.addEventListener('focus',()=>selectProject(button));
+ });
  const projectDialog=$('#project-image-dialog');
  $('[data-open-project-image]').addEventListener('click',()=>{const image=$('#project-feature-image'),full=$('#project-full-image');full.src=image.src;full.alt=image.alt;projectDialog.showModal();});
  $('[data-close-project-image]').addEventListener('click',()=>projectDialog.close());
  projectDialog.addEventListener('click',event=>{if(event.target===projectDialog)projectDialog.close();});
+ if(!reduced){
+   new IntersectionObserver(entries=>{projectVisible=entries.some(entry=>entry.isIntersecting);},{threshold:.15}).observe($('#divisions'));
+   setInterval(()=>{const focused=document.activeElement;const keyboardFocus=focused?.matches(':focus-visible')&&$('.project-thumbnails').contains(focused);if(!projectVisible||document.hidden||projectDialog.open||performance.now()<projectPausedUntil||$('.project-thumbnails').matches(':hover')||keyboardFocus)return;selectProject(projectButtons[(currentProject+1)%projectButtons.length],false);},4800);
+ }
+
+ const processSection=$('#process'),processSequence=$('.process-sequence'),processGrid=$('.process-writing-grid');
+ const processSteps=$$('.process-written-step'),processConnector=$('.process-connector'),processRail=$('.process-rail'),processProgressPath=$('.process-progress'),processTraveller=$('.process-traveller');
+ let processMilestones=[],processTotal=0,processActive=false,processStart=0,processFrame=0,processFraction=0;
+ function paintProcess(fraction){
+   processFraction=fraction;processSection.dataset.progress=String(fraction);processProgressPath.style.strokeDashoffset=String(1-fraction);
+   if(processTotal){const point=processProgressPath.getPointAtLength(processTotal*fraction);processTraveller.setAttribute('cx',point.x);processTraveller.setAttribute('cy',point.y);}
+   const current=processMilestones.reduce((last,value,index)=>fraction>=value-.00001?index:last,0);
+   processSteps.forEach((step,index)=>{const reached=(processActive||reduced)&&fraction>=processMilestones[index]-.00001,active=processActive&&index===current;step.classList.toggle('process-reached',reached);step.classList.toggle('process-current',active);if(active&&!step.vectorAnimation&&!reduced){step.vectorAnimation=$('.process-vector',step).animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:1000,iterations:Infinity,easing:ease});}else if(!active&&step.vectorAnimation){step.vectorAnimation.cancel();step.vectorAnimation=null;}});
+ }
+ function drawProcessConnector(){
+   const columns=Number(getComputedStyle(processGrid).getPropertyValue('--process-columns'))||7;
+   processSteps.forEach((step,index)=>{const row=Math.floor(index/columns),column=index%columns;step.style.gridColumn=String(row%2===0?column+1:columns-column);step.style.gridRow=String(row+1);});
+   requestAnimationFrame(()=>{
+     const bounds=processSequence.getBoundingClientRect(),anchors=processSteps.map(step=>{const icon=$('.process-vector',step).getBoundingClientRect();return{x:icon.left-bounds.left+icon.width/2,y:icon.top-bounds.top+icon.height/2};});
+     processConnector.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
+     const points=[anchors[0]],distances=[0];let distance=0;
+     const add=point=>{const previous=points[points.length-1];distance+=Math.hypot(point.x-previous.x,point.y-previous.y);points.push(point);};
+     anchors.slice(1).forEach((point,index)=>{const previous=anchors[index];if(Math.abs(previous.y-point.y)>5){const outside=previous.x>bounds.width/2?bounds.width+7:-7;add({x:outside,y:previous.y});add({x:outside,y:point.y});}add(point);distances.push(distance);});
+     const path=points.map((point,index)=>`${index?'L':'M'}${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(' ');
+     processRail.setAttribute('d',path);processProgressPath.setAttribute('d',path);processTotal=processProgressPath.getTotalLength();processMilestones=distances.map(value=>value/distance);paintProcess(reduced?1:processFraction);
+   });
+ }
+ function stopProcess(){processActive=false;cancelAnimationFrame(processFrame);paintProcess(0);}
+ function startProcess(){
+   if(processActive)return;processActive=true;processStart=performance.now();
+   const frame=now=>{if(!processActive)return;let elapsed=now-processStart;if(elapsed>16600){processSteps.forEach(step=>step.classList.remove('process-reached'));processStart=now;elapsed=0;}paintProcess(Math.min(1,elapsed/14000));processFrame=requestAnimationFrame(frame);};processFrame=requestAnimationFrame(frame);
+ }
+ drawProcessConnector();window.addEventListener('resize',drawProcessConnector,{passive:true});
+ if(!reduced)new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting))startProcess();else stopProcess();},{threshold:.1}).observe(processSection);
 
  const wheel=$('#greenfield-wheel'),wheelCards=$$('[data-wheel-card]',wheel);
  let wheelFrame=0,wheelStarted=false;

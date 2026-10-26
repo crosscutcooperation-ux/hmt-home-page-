@@ -45,6 +45,12 @@ export default function ProcessJourney() {
       <div className="process-journey-inner">
         <p className="section-eyebrow">How a plant gets built</p>
         <h2 id="process-heading">Project execution process</h2>
+        <div className="process-sequence">
+        <svg className="process-connector" aria-hidden="true" preserveAspectRatio="none">
+          <path className="process-rail" fill="none" />
+          <path className="process-progress" fill="none" pathLength="1" />
+          <circle className="process-traveller" r="4" />
+        </svg>
         <ol className="process-writing-grid" aria-label="Fourteen stages from enquiry to handover">
           {stages.map((stage, index) => (
             <li className="process-written-step" style={{ '--step': index, '--column': index < 7 ? index + 1 : 14 - index, '--row': index < 7 ? 1 : 2 }} key={stage}>
@@ -54,6 +60,7 @@ export default function ProcessJourney() {
             </li>
           ))}
         </ol>
+        </div>
       </div>
     </section>
   );

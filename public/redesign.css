@@ -363,3 +363,29 @@
   .footer-safety-tail,.footer-safety-tail>div:first-child{height:50px!important}
 }
 @media(prefers-reduced-motion:reduce){.process-vector *{animation:none!important;transition:none!important;stroke-dashoffset:0!important}.project-main-image,.project-information{transition:none!important}}
+
+/* Preserve the headings printed into the supplied service posters. */
+.wheel-card:nth-child(-n+4) img{object-position:center top}
+.hmt-site footer.hmt-footer::before{background-image:url('/assets/hmt/client-why-execution.webp');background-position:center 44%}
+
+/* A single route carries the process signal from one illustrated stage to the next. */
+.process-sequence{position:relative}
+.process-connector{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.process-rail{stroke:#d6d2c9;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.process-progress{stroke:#171717;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.process-traveller{fill:#171717;transition:opacity .3s}
+.process-journey:not(.is-in-view) .process-traveller{opacity:0}
+.process-journey:not(.is-in-view) .process-progress{transition:stroke-dashoffset .5s}
+.process-writing-grid{position:relative;z-index:1;--process-columns:7}
+.process-written-step::after{display:none!important}
+.process-vector{position:relative;z-index:2;padding:6px;box-sizing:content-box;background:var(--paper);color:#1b1b1b;transition:color .4s}
+.process-reached .process-vector{color:var(--accent)}
+.hmt-site.motion-ready .process-vector :is(path,circle,rect){stroke-dasharray:none!important;stroke-dashoffset:0!important;transition:none}
+.process-journey .process-vector .vector-motion,.process-journey .process-vector .vector-clock{animation:none}
+.process-journey .process-current .process-vector .vector-motion{animation:process-work .9s ease-in-out infinite}
+.process-journey .process-current .process-vector .vector-clock{animation:process-clock 2s linear infinite}
+.process-current .process-vector>g{animation:process-active 1.2s ease-in-out infinite;transform-origin:48px 48px}
+@keyframes process-active{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@media(max-width:1100px){.process-writing-grid{--process-columns:4}}
+@media(max-width:600px){.process-writing-grid{--process-columns:2}}
+@media(prefers-reduced-motion:reduce){.process-current .process-vector>g{animation:none}.process-traveller{display:none}.process-progress{stroke-dashoffset:0}}
