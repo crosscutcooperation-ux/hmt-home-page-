@@ -30,9 +30,17 @@
  $('[data-close-survey]').addEventListener('click',closeSurvey);
  survey.addEventListener('cancel',e=>{e.preventDefault();closeSurvey();});
  survey.addEventListener('click',e=>{if(e.target===survey){const rect=survey.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)closeSurvey();}});
- const scheduleSurvey=()=>{try{if(sessionStorage.getItem('hmt-lead-popup-seen'))return;}catch{}setTimeout(()=>{try{sessionStorage.setItem('hmt-lead-popup-seen','1');}catch{}openSurvey();},3000);};
  const openingFilm=$('.scroll-video-hero');
- if(openingFilm&&!reduced&&openingFilm.getBoundingClientRect().bottom>innerHeight)window.addEventListener('hmt:hero-complete',scheduleSurvey,{once:true});else scheduleSurvey();
+ let surveyTimer=0,surveyScheduled=false;
+ const scheduleSurvey=()=>{
+   try{if(sessionStorage.getItem('hmt-lead-popup-seen'))return;}catch{}
+   if(surveyScheduled)return;
+   // Never dim the film, including its final frame or a reverse scroll into it.
+   if(openingFilm&&openingFilm.getBoundingClientRect().bottom>0)return;
+   surveyScheduled=true;
+   surveyTimer=setTimeout(()=>{surveyTimer=0;if(openingFilm&&openingFilm.getBoundingClientRect().bottom>0){surveyScheduled=false;return;}try{sessionStorage.setItem('hmt-lead-popup-seen','1');}catch{}openSurvey();},3000);
+ };
+ if(openingFilm){window.addEventListener('scroll',()=>{if(openingFilm.getBoundingClientRect().bottom>0&&surveyTimer){clearTimeout(surveyTimer);surveyTimer=0;surveyScheduled=false;}scheduleSurvey();},{passive:true});scheduleSurvey();}else scheduleSurvey();
  $$('[data-project-type]').forEach(button=>button.addEventListener('click',()=>{const selected=button.getAttribute('aria-pressed')!=='true';$$('[data-project-type]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});if(selected){button.classList.add('selected');button.setAttribute('aria-pressed','true');}}));
  const status=(form,message,error=false)=>{let el=$('.preview-status',form);if(!el){el=document.createElement('p');el.className='preview-status';el.setAttribute('role','status');form.append(el);}el.textContent=message;el.style.color=error?'#dc2626':'#4f4f4f';};
  $('#survey-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;const data=new FormData(form);if(!String(data.get('name')||'').trim()||String(data.get('phone')||'').replace(/\D/g,'').length<10){status(form,'Please enter your name and a valid phone number.',true);return;}const email=$('[name="email"]',form);if(email.value&&!email.checkValidity()){email.reportValidity();return;}status(form,'Preview only — your free site survey request has not been sent.');});

@@ -12,6 +12,14 @@
   },
   "assets": [
     {
+      "file": "client-footer-panorama.webp",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "bytes": 232608
+    },
+    {
       "file": "client-import-export-port.webp",
       "dimensions": [
         2000,
@@ -100,12 +108,28 @@
       "bytes": 508896
     },
     {
+      "file": "client-service-eot.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 508768
+    },
+    {
       "file": "client-service-epc.webp",
       "dimensions": [
         1024,
         1536
       ],
       "bytes": 389320
+    },
+    {
+      "file": "client-service-epoxy.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 384384
     },
     {
       "file": "client-service-heavy.webp",
@@ -170,6 +194,14 @@
         1536
       ],
       "bytes": 546550
+    },
+    {
+      "file": "client-service-technical.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 405114
     },
     {
       "file": "client-service-turnkey.webp",

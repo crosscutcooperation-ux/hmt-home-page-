@@ -365,7 +365,7 @@
 @media(prefers-reduced-motion:reduce){.process-vector *{animation:none!important;transition:none!important;stroke-dashoffset:0!important}.project-main-image,.project-information{transition:none!important}}
 
 /* Preserve the headings printed into the supplied service posters. */
-.wheel-card:nth-child(-n+10) img{object-position:center top}
+.wheel-card:not(:nth-child(12)) img{object-position:center top}
 .hmt-site footer.hmt-footer::before{background-image:url('/assets/hmt/client-why-execution.webp');background-position:center 44%}
 
 /* A single route carries the process signal from one illustrated stage to the next. */
@@ -391,7 +391,7 @@
 @media(prefers-reduced-motion:reduce){.process-current .process-vector>g{animation:none}.process-traveller{display:none}.process-progress{stroke-dashoffset:0}}
 
 /* Scroll-scrubbed opening film: native page scrolling, then an ordinary handoff. */
-.hmt-site #hero.scroll-video-hero{position:relative;height:calc(100svh + clamp(2400px,400svh,4400px));min-height:0;max-height:none;padding:0;overflow:visible;background:#111;--hero-copy-opacity:1;--hero-copy-shift:0px}
+.hmt-site #hero.scroll-video-hero{position:relative;height:calc(100svh + clamp(6400px,850svh,10000px));min-height:0;max-height:none;padding:0;overflow:visible;background:#111;--hero-copy-opacity:1;--hero-copy-shift:0px}
 .scroll-hero-sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:#111}
 .scroll-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .scroll-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#000b,transparent 85%);opacity:var(--hero-copy-opacity);pointer-events:none}
@@ -399,6 +399,7 @@
 .scroll-hero-copy>div{height:100%;min-height:0;max-width:none;padding:150px 6.5vw 100px;justify-content:center}
 .scroll-hero-copy a[aria-label="Scroll to divisions"]{display:none!important}
 .hero-copy-hidden .scroll-hero-copy{visibility:hidden;pointer-events:none}
+.hero-copy-hidden .scroll-hero-shade{display:none}
 .scroll-hero-sticky.saree-hero>.scroll-hero-guide{position:absolute;inset:auto 5vw 30px auto;display:flex;align-items:center;gap:16px;width:auto;height:auto;min-height:0;padding:10px 16px;background:#1119;backdrop-filter:blur(8px);color:white;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
 .scroll-hero-guide progress{appearance:none;width:100px;height:2px;border:0;background:#ffffff50;color:var(--accent)}
 .scroll-hero-guide progress::-webkit-progress-bar{background:#ffffff50}
@@ -412,8 +413,10 @@
 /* Light editorial footer, with the supplied industrial artwork along its lower edge. */
 .hmt-site footer.hmt-footer{padding-top:0!important;background:#faf8f1;color:#1b1b1b}
 .hmt-site footer.hmt-footer>div[aria-hidden="true"]{display:none}
-.hmt-site footer.hmt-footer::before{inset:auto 0 47px 0;height:280px;background:url('/assets/hmt/client-why-execution.webp') center 62%/cover no-repeat;filter:saturate(.85);opacity:1;mask-image:linear-gradient(to bottom,transparent 0%,#000 48%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 48%)}
-.hmt-site footer.hmt-footer::after{display:none}
+.hmt-site footer.hmt-footer::before{inset:auto 0 47px 0;height:300px;background:url('/assets/hmt/client-footer-panorama.webp') center 50%/cover no-repeat;filter:none;opacity:1;mix-blend-mode:multiply;mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 92%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 92%,transparent 100%)}
+.hmt-site footer.hmt-footer::after{content:"";display:block;position:absolute;inset:auto auto 200px 27%;width:210px;height:70px;z-index:0;pointer-events:none;background:radial-gradient(ellipse,#eef2f5b3,transparent 68%);filter:blur(12px);animation:footer-smoke-drift 9s ease-in-out infinite alternate}
+@keyframes footer-smoke-drift{from{transform:translate(0,12px) scale(.85);opacity:.25}to{transform:translate(35px,-22px) scale(1.2);opacity:.55}}
+@media(prefers-reduced-motion:reduce){.hmt-site footer.hmt-footer::after{animation:none}}
 .hmt-site footer.hmt-footer>div.relative.grid{grid-template-columns:1.8fr repeat(4,minmax(0,1fr));gap:30px;max-width:none;padding:52px var(--pad) 290px;align-items:start}
 .hmt-site footer.hmt-footer>div.relative.grid>div{grid-column:auto!important;min-width:0}
 .hmt-site footer.hmt-footer>div.relative.grid>div:first-child>a img{width:240px;height:auto;max-width:100%}
@@ -432,7 +435,7 @@
 .brownfield-photo{height:442px}
 .brownfield-photo-details{height:72px;display:flex;align-items:center;padding:10px 27px 10px 16px}
 .brownfield-photo-details>span{top:6px;right:8px;font-size:10px}
-.brownfield-photo-details h3{margin:0;font-size:20px;line-height:1.08;max-width:24ch}
+.brownfield-photo-details h3{margin:0;font-size:25px;line-height:1.04;max-width:24ch}
 @media(max-width:900px){
   .hmt-site footer.hmt-footer>div.relative.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 35px}
   .hmt-site footer.hmt-footer>div.relative.grid>div:first-child{grid-column:1/-1!important}
@@ -441,10 +444,12 @@
 @media(max-width:600px){
   .hmt-site footer.hmt-footer>div.relative.grid{padding:35px 22px 220px;gap:27px 22px}
   .hmt-site footer.hmt-footer>div.relative.grid>div:first-child>a img{width:215px}
-  .hmt-site footer.hmt-footer::before{height:210px;bottom:69px;background-position:center 65%}
+  .hmt-site footer.hmt-footer::before{height:210px;bottom:69px;background-position:center 50%}
+  .hmt-site footer.hmt-footer::after{bottom:175px;left:17%;width:140px;height:55px}
   .hmt-site footer.hmt-footer>.relative.border-t>div{padding:13px 22px}
   .hmt-site footer.hmt-footer li,.hmt-site footer.hmt-footer li a{font-size:13px}
   .brownfield-photo{height:379px}
   .brownfield-photo-details{height:64px;padding:9px 23px 9px 14px}
-  .brownfield-photo-details h3{font-size:19px}
+  .brownfield-photo-details h3{font-size:23px}
 }
+@media(max-width:360px){.brownfield-photo:nth-child(11) .brownfield-photo-details h3{font-size:20px}}

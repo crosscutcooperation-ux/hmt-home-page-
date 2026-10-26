@@ -32,10 +32,10 @@ const greenfieldServices = [
   ['Turnkey Projects', 'client-service-turnkey.webp'],
   ['PEB Buildings', 'client-service-peb.webp'],
   ['Heavy Engineering', 'client-service-heavy.webp'],
-  ['EOT Crane Installation', 'hmt-hmt-crane-machine-lift.webp'],
+  ['EOT Crane Installation', 'client-service-eot.webp'],
   ['Industrial Automation', 'industrial-automation.webp'],
-  ['Epoxy Flooring', 'epoxy-flooring.webp'],
-  ['Technical Support', 'hmt-greenfield-technical-support.webp'],
+  ['Epoxy Flooring', 'client-service-epoxy.webp'],
+  ['Technical Support', 'client-service-technical.webp'],
 ];
 
 const brownfieldServices = [
