@@ -59,7 +59,7 @@
  }
  const footer=$('footer.hmt-footer'),footerTape=footer?.previousElementSibling;
  const footerLogo=footer?.querySelector('img[src*="logo-hmt-light.png"]');
- if(footerLogo)footerLogo.src='./assets/hmt/logo-hmt.png';
+ if(footerLogo)footerLogo.src='./assets/hmt/logo-hmt-light.png';
  if(footerTape?.textContent?.includes('Safety First')){footer.after(footerTape);footerTape.classList.add('footer-safety-tail');}
  function animateProjectDetails(){
    if(reduced)return;

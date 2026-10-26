@@ -389,3 +389,43 @@
 @media(max-width:1100px){.process-writing-grid{--process-columns:4}}
 @media(max-width:600px){.process-writing-grid{--process-columns:2}}
 @media(prefers-reduced-motion:reduce){.process-current .process-vector>g{animation:none}.process-traveller{display:none}.process-progress{stroke-dashoffset:0}}
+
+/* Light editorial footer, with the supplied industrial artwork along its lower edge. */
+.hmt-site footer.hmt-footer{padding-top:0!important;background:#faf8f1;color:#1b1b1b}
+.hmt-site footer.hmt-footer>div[aria-hidden="true"]{display:none}
+.hmt-site footer.hmt-footer::before{inset:auto 0 47px 0;height:280px;background:url('/assets/hmt/client-why-execution.webp') center 62%/cover no-repeat;filter:saturate(.85);opacity:1;mask-image:linear-gradient(to bottom,transparent 0%,#000 48%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 48%)}
+.hmt-site footer.hmt-footer::after{display:none}
+.hmt-site footer.hmt-footer>div.relative.grid{grid-template-columns:1.8fr repeat(4,minmax(0,1fr));gap:30px;max-width:none;padding:52px var(--pad) 290px;align-items:start}
+.hmt-site footer.hmt-footer>div.relative.grid>div{grid-column:auto!important;min-width:0}
+.hmt-site footer.hmt-footer>div.relative.grid>div:first-child>a img{width:240px;height:auto;max-width:100%}
+.hmt-site footer.hmt-footer>div.relative.grid>div:first-child>p{font-size:14px;line-height:1.55;max-width:46ch}
+.hmt-site footer.hmt-footer>div.relative.grid>div:first-child>p.text-accent{font-size:11px;line-height:1.5;letter-spacing:.16em;max-width:100%}
+.hmt-site footer.hmt-footer .text-text-primary{color:#171717}
+.hmt-site footer.hmt-footer .text-text-secondary{color:#57564f}
+.hmt-site footer.hmt-footer li{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+.hmt-site footer.hmt-footer li a{font-size:14px}
+.hmt-site footer.hmt-footer h2{font-size:12px;color:#171717}
+.hmt-site footer.hmt-footer .bg-background\/60{background:#faf8f1!important}
+.hmt-site footer.hmt-footer>.relative.border-t{border-color:#dedbd1}
+.hmt-site footer.hmt-footer>.relative.border-t>div{max-width:none;padding:15px var(--pad)}
+.hmt-site footer.hmt-footer a.grid{background:transparent;border-color:#ccc8bd;color:#1b1b1b}
+.footer-safety-tail{background:#faf8f1}
+.brownfield-photo{height:442px}
+.brownfield-photo-details{height:72px;display:flex;align-items:center;padding:10px 27px 10px 16px}
+.brownfield-photo-details>span{top:6px;right:8px;font-size:10px}
+.brownfield-photo-details h3{margin:0;font-size:20px;line-height:1.08;max-width:24ch}
+@media(max-width:900px){
+  .hmt-site footer.hmt-footer>div.relative.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 35px}
+  .hmt-site footer.hmt-footer>div.relative.grid>div:first-child{grid-column:1/-1!important}
+  .hmt-site footer.hmt-footer>div.relative.grid>div:first-child>p{max-width:65ch}
+}
+@media(max-width:600px){
+  .hmt-site footer.hmt-footer>div.relative.grid{padding:35px 22px 220px;gap:27px 22px}
+  .hmt-site footer.hmt-footer>div.relative.grid>div:first-child>a img{width:215px}
+  .hmt-site footer.hmt-footer::before{height:210px;bottom:69px;background-position:center 65%}
+  .hmt-site footer.hmt-footer>.relative.border-t>div{padding:13px 22px}
+  .hmt-site footer.hmt-footer li,.hmt-site footer.hmt-footer li a{font-size:13px}
+  .brownfield-photo{height:379px}
+  .brownfield-photo-details{height:64px;padding:9px 23px 9px 14px}
+  .brownfield-photo-details h3{font-size:19px}
+}
