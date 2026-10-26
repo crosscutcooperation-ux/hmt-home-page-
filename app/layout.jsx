@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preload" as="image" href="/assets/hmt/robotic-machines-ig.webp" />
+        <link rel="preload" as="image" href="/assets/hmt/hero-scroll-poster.jpg" />
         <link rel="stylesheet" href="/hmt-original.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/redesign.css" />
