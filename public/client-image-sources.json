@@ -1,0 +1,199 @@
+{
+  "suppliedDriveFolder": "https://drive.google.com/drive/folders/1ekAurbvs4Sa3Px9voW1JWEX_syo470Qt",
+  "processing": "Optimized WebP copies of source originals. Native dimensions retained except images larger than 2400px, which are reduced for delivery. No artificial enlargement.",
+  "sectorSources": {
+    "textile": "https://gurtekstextile.com/gurteks_menu_production_line-En.html",
+    "glass": "https://www.glass-international.com/news/pilkington-reaches-glass-manufacturing-milestone",
+    "paper": "https://www.valmet.com/media/news/other-news/2025/successful-start-up-at-liansheng-pulp--papers-coated-board-making-line-pm-2/",
+    "printing": "https://www.heidelberg.com/global/en/about_heidelberg/press_relations/press_release/press_release_details/press_release_85632.jsp",
+    "plastics": "https://www.engelglobal.com/en/custom-injection-moulding",
+    "food": "https://www.lassonde.com/en/etablissements/calgary-plant/",
+    "cement": "https://www.fuller-technologies.com/products/ok-raw-and-cement-mill"
+  },
+  "assets": [
+    {
+      "file": "client-import-export-port.webp",
+      "dimensions": [
+        2000,
+        1333
+      ],
+      "bytes": 840206
+    },
+    {
+      "file": "client-industry-cement.webp",
+      "dimensions": [
+        1920,
+        1280
+      ],
+      "bytes": 520988
+    },
+    {
+      "file": "client-industry-food.webp",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 602766
+    },
+    {
+      "file": "client-industry-glass.webp",
+      "dimensions": [
+        1200,
+        630
+      ],
+      "bytes": 187976
+    },
+    {
+      "file": "client-industry-paper.webp",
+      "dimensions": [
+        1200,
+        600
+      ],
+      "bytes": 193944
+    },
+    {
+      "file": "client-industry-plastics.webp",
+      "dimensions": [
+        1200,
+        630
+      ],
+      "bytes": 264176
+    },
+    {
+      "file": "client-industry-printing.webp",
+      "dimensions": [
+        2400,
+        1600
+      ],
+      "bytes": 909598
+    },
+    {
+      "file": "client-industry-textile.webp",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "bytes": 261990
+    },
+    {
+      "file": "client-project-brownfield.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 563592
+    },
+    {
+      "file": "client-project-greenfield.webp",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "bytes": 502676
+    },
+    {
+      "file": "client-project-pmc.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 508896
+    },
+    {
+      "file": "client-service-epc.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 389320
+    },
+    {
+      "file": "client-service-infrastructure.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 502668
+    },
+    {
+      "file": "client-service-mep.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 532856
+    },
+    {
+      "file": "client-service-reactor.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 546550
+    },
+    {
+      "file": "client-why-delivery.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 397506
+    },
+    {
+      "file": "client-why-execution.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 518724
+    },
+    {
+      "file": "client-why-global.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 501996
+    },
+    {
+      "file": "client-why-heavy.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 726618
+    },
+    {
+      "file": "client-why-legacy.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 322076
+    },
+    {
+      "file": "client-why-oem.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 351408
+    },
+    {
+      "file": "client-why-responsibility.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 376726
+    },
+    {
+      "file": "client-why-safety.webp",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "bytes": 431018
+    }
+  ]
+}

@@ -3,29 +3,29 @@ const asset = name => `/assets/hmt/${name}`;
 const projects = [
   {
     title: 'Greenfield Projects',
-    image: 'hmt-greenfield-industrial-infrastructure.webp',
+    image: 'client-project-greenfield.webp',
     description: 'A new facility needs one coordinated plan from the first site decision to the first production run. HMT brings engineering, infrastructure, equipment and commissioning together.',
     points: ['Site planning and industrial infrastructure', 'Machinery procurement, installation and utilities', 'Automation, testing and production readiness'],
   },
   {
     title: 'Brownfield Projects',
-    image: 'hmt-brownfield-factory-relocation.webp',
+    image: 'client-project-brownfield.webp',
     description: 'Modernize an operating plant without losing sight of the production schedule. We plan relocation, upgrades and installation around access, shutdown windows and restart.',
     points: ['Factory and machine relocation', 'Retrofitting and capacity upgrades', 'Sequenced restart and commissioning'],
   },
   {
-    title: 'Planned Mobilization & Capacity Expansion',
-    image: 'hmt-hmt-machine-loading.webp',
-    description: 'Move equipment and grow output through a deliberate sequence. Survey, lifting, logistics, installation and handover are planned together before work begins on site.',
-    points: ['Mobilization and lifting plans', 'Equipment movement and installation', 'Expanded capacity with controlled handover'],
+    title: 'PMC — Project Management Consultant',
+    image: 'client-project-pmc.webp',
+    description: 'One coordinated view of scope, programme, cost and quality. HMT supports the owner from project planning and vendor coordination through site execution, commissioning and handover.',
+    points: ['Project planning, scheduling and progress monitoring', 'Vendor, contractor and site coordination', 'Quality, safety, cost control and handover oversight'],
   },
 ];
 
 const greenfieldServices = [
-  ['EPC Projects', 'epc-img.webp'],
-  ['Industrial Infrastructure', 'utility-system-installation-img.webp'],
-  ['MEP Services', 'mep-design-and-layout-images.webp'],
-  ['Reactor, Boiler & Process Equipment Erection', 'hmt-greenfield-reactor-boiler-erection.webp'],
+  ['EPC Projects', 'client-service-epc.webp'],
+  ['Industrial Infrastructure', 'client-service-infrastructure.webp'],
+  ['MEP Services', 'client-service-mep.webp'],
+  ['Reactor, Boiler & Process Equipment Erection', 'client-service-reactor.webp'],
   ['Machine Procurement', 'haas-vf-1-cnc-machine-for-sale-1.webp'],
   ['PLC Integration', 'industrial-ht-panel-control-room1.webp'],
   ['OEM Coordination', 'hmt-greenfield-oem-coordination.webp'],
@@ -41,9 +41,9 @@ const greenfieldServices = [
 const brownfieldServices = [
   ['Factory Relocation', 'factory-shifting-img.webp'],
   ['Machine Relocation', 'hmt-hmt-heavy-mill-move.webp'],
-  ['International Machine Movement', 'hmt-brownfield-international-machine-movement.webp'],
+  ['International Machine Movement', 'client-why-global.webp'],
   ['Machine Packaging', 'hmt-brownfield-machine-packaging.webp'],
-  ['Import & Export', 'hmt-brownfield-import-export.webp'],
+  ['Import & Export', 'client-import-export-port.webp'],
   ['Customs Clearance', 'hmt-brownfield-customs-clearance.webp'],
   ['Machine Retrofitting', 'original-hmt-precision-alignment.webp'],
   ['PLC Upgradation', 'hmt-hmt-panel-wiring.webp'],
@@ -58,25 +58,25 @@ const industries = [
   ['Aerospace & Defence', 'original-hd-aerospace.webp', 'Precision equipment movement and installation for demanding production environments.'],
   ['Pharmaceutical & Healthcare', 'hmt-stock-38.webp', 'Equipment installation and facility change coordinated with plant procedures.'],
   ['Chemical & Petrochemical', 'original-hd-contact.webp', 'Process equipment, utilities and mechanical systems handled as one sequence.'],
-  ['Plastics, Rubber & Tyre', 'machine-retrofitting.webp', 'Large processing machines relocated and integrated with production priorities.'],
+  ['Plastics, Rubber & Tyre', 'client-industry-plastics.webp', 'Large processing machines relocated and integrated with production priorities.'],
   ['Steel, Metals, Foundry & Forging', 'fabrication-and-erection.webp', 'Heavy equipment movement shaped by loads, lifting routes and foundations.'],
   ['General Engineering & Machine Tools', 'original-hmt-cnc-operator.webp', 'CNC and precision machinery moved, aligned and returned to service.'],
   ['Electronics, Electrical & Semiconductor', 'original-hd-semi.webp', 'Production lines and specialized equipment placed with controlled precision.'],
-  ['Food, Beverage & FMCG', 'original-hd-food.webp', 'Processing and packaging lines installed around production readiness.'],
-  ['Packaging & Printing', 'original-hd-loading.webp', 'Converting, printing and packaging machinery transferred in planned stages.'],
-  ['Glass, Ceramics & Tiles', 'pneumatic-pipe-installation.webp', 'Production systems and utilities integrated to the approved layout.'],
-  ['Textile & Garments', 'hmt-stock-14.webp', 'Textile equipment and full lines shifted for the next production cycle.'],
-  ['Paper & Pulp', 'original-hd-plastic.webp', 'Large machinery and material handling systems installed in sequence.'],
+  ['Food, Beverage & FMCG', 'client-industry-food.webp', 'Processing and packaging lines installed around production readiness.'],
+  ['Packaging & Printing', 'client-industry-printing.webp', 'Converting, printing and packaging machinery transferred in planned stages.'],
+  ['Glass, Ceramics & Tiles', 'client-industry-glass.webp', 'Production systems and utilities integrated to the approved layout.'],
+  ['Textile & Garments', 'client-industry-textile.webp', 'Textile equipment and full lines shifted for the next production cycle.'],
+  ['Paper & Pulp', 'client-industry-paper.webp', 'Large machinery and material handling systems installed in sequence.'],
   ['Power, Renewable Energy & Battery', 'original-hd-power.webp', 'Specialized production assets placed for new and expanding facilities.'],
-  ['Cement, Building Materials & Mining', 'hmt-stock-65.webp', 'Heavy process machinery moved with attention to access and lifting.'],
+  ['Cement, Building Materials & Mining', 'client-industry-cement.webp', 'Heavy process machinery moved with attention to access and lifting.'],
 ];
 
 export function ProjectShowcase() {
   return (
     <section id="divisions" className="project-showcase hmt-section" aria-labelledby="project-showcase-title">
       <div className="showcase-inner">
-        <h2 id="project-showcase-title" className="project-written-title" aria-label="Brownfield. Greenfield. Turnkey Solutions.">
-          <span>Brownfield.</span> <span>Greenfield.</span> <span>Turnkey Solutions.</span>
+        <h2 id="project-showcase-title" className="project-written-title" aria-label="Greenfield. Brownfield. PMC.">
+          <span>Greenfield.</span> <span>Brownfield.</span> <span>PMC.</span>
         </h2>
         <div className="project-layout">
           <div className="project-thumbnails" role="group" aria-label="Choose a project type">
