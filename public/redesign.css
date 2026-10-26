@@ -365,7 +365,7 @@
 @media(prefers-reduced-motion:reduce){.process-vector *{animation:none!important;transition:none!important;stroke-dashoffset:0!important}.project-main-image,.project-information{transition:none!important}}
 
 /* Preserve the headings printed into the supplied service posters. */
-.wheel-card:nth-child(-n+4) img{object-position:center top}
+.wheel-card:nth-child(-n+10) img{object-position:center top}
 .hmt-site footer.hmt-footer::before{background-image:url('/assets/hmt/client-why-execution.webp');background-position:center 44%}
 
 /* A single route carries the process signal from one illustrated stage to the next. */

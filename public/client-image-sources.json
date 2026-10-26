@@ -108,12 +108,28 @@
       "bytes": 389320
     },
     {
+      "file": "client-service-heavy.webp",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "bytes": 447976
+    },
+    {
       "file": "client-service-infrastructure.webp",
       "dimensions": [
         1024,
         1536
       ],
       "bytes": 502668
+    },
+    {
+      "file": "client-service-machine-procurement.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 526434
     },
     {
       "file": "client-service-mep.webp",
@@ -124,12 +140,44 @@
       "bytes": 532856
     },
     {
+      "file": "client-service-oem.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 465320
+    },
+    {
+      "file": "client-service-peb.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 514250
+    },
+    {
+      "file": "client-service-plc.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 436984
+    },
+    {
       "file": "client-service-reactor.webp",
       "dimensions": [
         1024,
         1536
       ],
       "bytes": 546550
+    },
+    {
+      "file": "client-service-turnkey.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 533376
     },
     {
       "file": "client-why-delivery.webp",
