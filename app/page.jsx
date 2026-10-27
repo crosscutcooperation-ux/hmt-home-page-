@@ -6,6 +6,7 @@ import { ProjectShowcase, GreenfieldWheel, BrownfieldStrip, IndustryCinema } fro
 import ProcessJourney from './journey';
 import ContactDesk from './contact';
 import ScrollHero from './scroll-hero';
+import FooterSmoke from './footer-smoke';
 
 const markup = readFileSync(join(process.cwd(), 'content', 'homepage.html'), 'utf8');
 
@@ -20,6 +21,7 @@ export default function HomePage() {
           if (node.name === 'section' && node.attribs?.id === 'process') return <ProcessJourney />;
           if (node.name === 'section' && node.attribs?.id === 'contact') return <ContactDesk />;
           switch (node.attribs?.['data-hmt-slot']) {
+            case 'footer-smoke': return <FooterSmoke />;
             case 'divisions': return <ProjectShowcase />;
             case 'greenfield': return <GreenfieldWheel />;
             case 'brownfield': return <BrownfieldStrip />;
