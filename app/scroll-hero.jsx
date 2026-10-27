@@ -82,7 +82,7 @@ export default function ScrollHero() {
           <div className="hero-division-copy">
             <p className="hero-brand">Hindustan Machine Tools</p>
             <div key={division} className="hero-division-writing" aria-live="polite">
-              <h1 id="hero-division-title">{division}</h1>
+              <h1 id="hero-division-title">{division.toUpperCase()}</h1>
               <p className="hero-division-tagline">{division === 'Greenfield'
                 ? 'From bare land to full production, supporting every milestone.'
                 : 'Single machine or full production line — we support with the same care and precision.'}</p>

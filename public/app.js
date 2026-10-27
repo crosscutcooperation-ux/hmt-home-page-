@@ -22,8 +22,7 @@
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();$$('.menu-open').forEach(g=>{g.classList.remove('menu-open');$('a',g).setAttribute('aria-expanded','false');});}});
  document.addEventListener('click',e=>{if(!e.target.closest('#site-header'))closeMenu();});
  const progress=document.createElement('div');progress.className='scroll-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
- let headerDark=false;
- function updateScroll(){const scrolled=scrollY>40;header.classList.toggle('scrolled',scrolled);if(scrolled!==headerDark){$('.hmt-header img').src=scrolled?'./assets/hmt/logo-hmt-light.png':'./assets/hmt/logo-hmt.png';headerDark=scrolled;}const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max>0?scrollY/max:0})`;}
+ function updateScroll(){const hero=$('#hero'),overFilm=hero&&hero.getBoundingClientRect().bottom>header.offsetHeight;const scrolled=scrollY>40&&!overFilm;header.classList.toggle('scrolled',scrolled);header.classList.toggle('over-hero',Boolean(overFilm));const logo=$('img',header),source=scrolled?'./assets/hmt/logo-hmt-light.png':'./assets/hmt/logo-hmt.png';if(logo.getAttribute('src')!==source)logo.src=source;const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max>0?scrollY/max:0})`;}
  window.addEventListener('scroll',updateScroll,{passive:true});window.addEventListener('resize',()=>{if(innerWidth>=1024)closeMenu();updateScroll();});updateScroll();
  function openSurvey(){if(!survey.open&&!document.querySelector('dialog[open]'))survey.showModal();}
  function closeSurvey(){if(reduced){survey.close();return;}if(survey.classList.contains('closing'))return;survey.classList.add('closing');setTimeout(()=>{survey.close();survey.classList.remove('closing');},400);}

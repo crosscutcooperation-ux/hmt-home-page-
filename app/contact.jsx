@@ -1,15 +1,15 @@
 const intents = [
   { title: 'Request a Site Visit', short: 'Site Visit', description: 'Walk the land or the live plant with an HMT engineer.', prompt: 'Tell us where to meet you and what our engineer should inspect.', fields: [
     ['Site location', 'siteLocation', 'text', 'City, plant or project site', true],
-    ['Preferred visit window', 'visitWindow', 'text', 'Your preferred date or week', false],
+    ['Preferred Visit Date', 'visitWindow', 'date', '', false],
   ] },
   { title: 'Request a Project Consultation', short: 'Project Consultation', description: 'Scope, sequence and responsibility defined before a proposal.', prompt: 'Describe the project decision you are working through.', fields: [
     ['Main challenge', 'mainChallenge', 'text', 'What needs to be solved?', true],
-    ['Preferred consultation date', 'consultationDate', 'text', 'Your preferred date or week', false],
+    ['Preferred Consultation Date', 'consultationDate', 'date', '', false],
   ] },
   { title: 'Get a Quote', short: 'Quote', description: 'Tell us the division, the asset and the date that cannot slip.', prompt: 'Share your project scope so we can prepare the right proposal.', fields: [
     ['Plant location', 'plantLocation', 'text', 'City and plant or project site', false],
-    ['Target date', 'targetDate', 'text', 'When must work begin or finish?', false],
+    ['Target Date', 'targetDate', 'date', '', false],
   ] },
 ];
 

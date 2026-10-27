@@ -414,9 +414,7 @@
 .hmt-site footer.hmt-footer{padding-top:0!important;background:#faf8f1;color:#1b1b1b}
 .hmt-site footer.hmt-footer>div[aria-hidden="true"]{display:none}
 .hmt-site footer.hmt-footer::before{inset:auto 0 47px 0;height:300px;background:url('/assets/hmt/client-footer-panorama.webp') center 50%/cover no-repeat;filter:none;opacity:1;mix-blend-mode:multiply;mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 92%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 92%,transparent 100%)}
-.hmt-site footer.hmt-footer::after{content:"";display:block;position:absolute;inset:auto auto 200px 27%;width:210px;height:70px;z-index:0;pointer-events:none;background:radial-gradient(ellipse,#eef2f5b3,transparent 68%);filter:blur(12px);animation:footer-smoke-drift 9s ease-in-out infinite alternate}
-@keyframes footer-smoke-drift{from{transform:translate(0,12px) scale(.85);opacity:.25}to{transform:translate(35px,-22px) scale(1.2);opacity:.55}}
-@media(prefers-reduced-motion:reduce){.hmt-site footer.hmt-footer::after{animation:none}}
+.hmt-site footer.hmt-footer::after{display:none}
 .hmt-site footer.hmt-footer>div.relative.grid{grid-template-columns:1.8fr repeat(4,minmax(0,1fr));gap:30px;max-width:none;padding:52px var(--pad) 290px;align-items:start}
 .hmt-site footer.hmt-footer>div.relative.grid>div{grid-column:auto!important;min-width:0}
 .hmt-site footer.hmt-footer>div.relative.grid>div:first-child>a img{width:240px;height:auto;max-width:100%}
@@ -501,10 +499,18 @@
 }
 @media(prefers-reduced-motion:reduce){.hero-division-writing{animation:none}.scroll-hero-copy button{pointer-events:auto}}
 
-/* A shallow diagonal crosses the lower quarter of the footer artwork. */
-.hmt-site footer.hmt-footer>.footer-safety-cross{position:absolute;left:-2%;bottom:58px;width:104%;height:34px;z-index:2;overflow:hidden;transform:rotate(-1deg);transform-origin:center;pointer-events:none;background-color:#f5c518;background-image:repeating-linear-gradient(-45deg,#111 0 5px,#f5c518 5px 10px),repeating-linear-gradient(-45deg,#111 0 5px,#f5c518 5px 10px);background-size:auto 4px,auto 4px;background-position:0 0,0 100%;background-repeat:repeat-x;box-shadow:0 2px 6px #0002}
-.footer-safety-track{display:flex;width:max-content;height:100%;animation:hmt-tape 28s linear infinite}
-.footer-safety-repeat{display:flex;align-items:center;gap:48px;padding-right:48px;height:100%;flex-shrink:0}
-.footer-safety-repeat span{color:#111;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-@media(max-width:600px){.hmt-site footer.hmt-footer>.footer-safety-cross{bottom:40px;height:28px}.footer-safety-repeat{gap:30px;padding-right:30px}.footer-safety-repeat span{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.footer-safety-track{animation:none}}
+/* White branding stays legible throughout the film, including reverse scrolling. */
+.hmt-header.over-hero{background:linear-gradient(#111b,#1115);border-bottom-color:transparent}
+.scroll-hero-copy .hero-division-writing h1{font-size:clamp(64px,7.1vw,128px)}
+.contact-field input[type="date"]{color-scheme:light;min-width:0;cursor:pointer}
+.contact-field input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer;padding:5px}
+
+/* Independent translucent billows rise from the artwork's chimney and cooling tower. */
+.footer-smoke{position:absolute;inset:auto 0 0;height:300px;z-index:1;pointer-events:none}
+.footer-smoke-emitter{position:absolute;left:35.7%;bottom:calc(150px + 4.12vw);width:0;height:0}
+.footer-smoke-emitter.tower{left:30.5%;bottom:calc(150px + .9vw)}
+.footer-smoke-puff{position:absolute;left:0;bottom:0;width:58px;height:40px;border-radius:50%;background:radial-gradient(ellipse at 25% 60%,#b8ccd6a8,transparent 55%),radial-gradient(ellipse at 55% 35%,#d2dde3ba,transparent 60%),radial-gradient(ellipse at 78% 65%,#b6cbd68c,transparent 58%);filter:blur(3px);opacity:0;transform-origin:50% 100%;animation:footer-chimney-billow 8s linear infinite;animation-delay:calc(var(--puff) * -1.33s)}
+.tower .footer-smoke-puff{width:68px;height:44px;animation-duration:9s;animation-delay:calc(var(--puff) * -1.5s)}
+@keyframes footer-chimney-billow{0%{opacity:0;transform:translate(-50%,5px) scale(.3)}15%{opacity:.55}50%{opacity:.38;transform:translate(calc(-50% + 28px),-48px) scale(1.25)}100%{opacity:0;transform:translate(calc(-50% + 78px),-115px) scale(2.2)}}
+@media(max-width:600px){.scroll-hero-copy .hero-division-writing h1{font-size:clamp(32px,11vw,66px)}.footer-smoke{height:210px}.footer-smoke-emitter{left:calc(50% - 75px);bottom:126px}.footer-smoke-emitter.tower{left:calc(50% - 102px);bottom:110px}.footer-smoke-puff{width:34px;height:24px}.tower .footer-smoke-puff{width:40px;height:28px}}
+@media(prefers-reduced-motion:reduce){.footer-smoke{display:none}}
