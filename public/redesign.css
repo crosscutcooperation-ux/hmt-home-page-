@@ -500,3 +500,11 @@
  .footer-copyright{left:22px;bottom:222px;font-size:11px!important}
 }
 @media(prefers-reduced-motion:reduce){.hero-division-writing{animation:none}.scroll-hero-copy button{pointer-events:auto}}
+
+/* A shallow diagonal crosses the lower quarter of the footer artwork. */
+.hmt-site footer.hmt-footer>.footer-safety-cross{position:absolute;left:-2%;bottom:58px;width:104%;height:34px;z-index:2;overflow:hidden;transform:rotate(-1deg);transform-origin:center;pointer-events:none;background-color:#f5c518;background-image:repeating-linear-gradient(-45deg,#111 0 5px,#f5c518 5px 10px),repeating-linear-gradient(-45deg,#111 0 5px,#f5c518 5px 10px);background-size:auto 4px,auto 4px;background-position:0 0,0 100%;background-repeat:repeat-x;box-shadow:0 2px 6px #0002}
+.footer-safety-track{display:flex;width:max-content;height:100%;animation:hmt-tape 28s linear infinite}
+.footer-safety-repeat{display:flex;align-items:center;gap:48px;padding-right:48px;height:100%;flex-shrink:0}
+.footer-safety-repeat span{color:#111;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+@media(max-width:600px){.hmt-site footer.hmt-footer>.footer-safety-cross{bottom:40px;height:28px}.footer-safety-repeat{gap:30px;padding-right:30px}.footer-safety-repeat span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.footer-safety-track{animation:none}}
