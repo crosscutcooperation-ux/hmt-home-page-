@@ -43,8 +43,7 @@ export default function ProcessJourney() {
   return (
     <section id="process" className="process-journey hmt-section" aria-labelledby="process-heading">
       <div className="process-journey-inner">
-        <p className="section-eyebrow">How a plant gets built</p>
-        <h2 id="process-heading">Project execution process</h2>
+        <h2 id="process-heading">Project Execution Process</h2>
         <div className="process-sequence">
         <svg className="process-connector" aria-hidden="true" preserveAspectRatio="none">
           <path className="process-rail" fill="none" />

@@ -67,10 +67,9 @@
    const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{entry.target.classList.toggle('is-in-view',entry.isIntersecting);if(entry.isIntersecting&&entry.target.id==='divisions')animateProjectEntrance();}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
    ['#divisions','#process'].forEach(selector=>{const section=$(selector);if(section)revealObserver.observe(section);});
  }
- const footer=$('footer.hmt-footer'),footerTape=footer?.previousElementSibling;
+ const footer=$('footer.hmt-footer');
  const footerLogo=footer?.querySelector('img[src*="logo-hmt-light.png"]');
  if(footerLogo)footerLogo.src='./assets/hmt/logo-hmt-light.png';
- if(footerTape?.textContent?.includes('Safety First')){footer.after(footerTape);footerTape.classList.add('footer-safety-tail');}
  function animateProjectDetails(){
    if(reduced)return;
    const panel=$('[data-project-panel]:not([hidden])');

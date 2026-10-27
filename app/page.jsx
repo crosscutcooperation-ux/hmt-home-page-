@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import parse, { domToReact } from 'html-react-parser';
+import parse from 'html-react-parser';
 import Script from 'next/script';
 import { ProjectShowcase, GreenfieldWheel, BrownfieldStrip, IndustryCinema } from './sections';
 import ProcessJourney from './journey';
@@ -15,8 +15,7 @@ export default function HomePage() {
       {parse(markup, {
         replace(node) {
           if (node.name === 'section' && node.attribs?.id === 'hero') {
-            const copy = node.children.filter(child => child.type === 'tag').at(-1);
-            return <ScrollHero>{domToReact([copy])}</ScrollHero>;
+            return <ScrollHero />;
           }
           if (node.name === 'section' && node.attribs?.id === 'process') return <ProcessJourney />;
           if (node.name === 'section' && node.attribs?.id === 'contact') return <ContactDesk />;

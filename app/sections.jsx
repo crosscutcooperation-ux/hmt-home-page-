@@ -33,7 +33,7 @@ const greenfieldServices = [
   ['PEB Buildings', 'client-service-peb.webp'],
   ['Heavy Engineering', 'client-service-heavy.webp'],
   ['EOT Crane Installation', 'client-service-eot.webp'],
-  ['Industrial Automation', 'industrial-automation.webp'],
+  ['Industrial Automation', 'client-service-automation.webp'],
   ['Epoxy Flooring', 'client-service-epoxy.webp'],
   ['Technical Support', 'client-service-technical.webp'],
 ];
@@ -75,6 +75,7 @@ export function ProjectShowcase() {
   return (
     <section id="divisions" className="project-showcase hmt-section" aria-labelledby="project-showcase-title">
       <div className="showcase-inner">
+        <p className="section-eyebrow">Experts In</p>
         <h2 id="project-showcase-title" className="project-written-title" aria-label="Greenfield. Brownfield. PMC.">
           <span>Greenfield.</span> <span>Brownfield.</span> <span>PMC.</span>
         </h2>
@@ -115,10 +116,7 @@ export function ProjectShowcase() {
 export function GreenfieldWheel() {
   return (
     <section id="greenfield" className="greenfield-wheel-section hmt-section" aria-labelledby="greenfield-title">
-      <div className="wheel-intro">
-        <div><p className="section-eyebrow">Greenfield Projects</p><h2 id="greenfield-title">From bare land to the first good part.</h2></div>
-        <p>Engineering, civil, mechanical, machines, automation and production readiness — held as one programme.</p>
-      </div>
+      <h2 id="greenfield-title" className="sr-only">Greenfield Services</h2>
       <div className="wheel-controls">
         <button type="button" data-wheel-step="-1" aria-label="Previous Greenfield services">←</button>
         <button type="button" data-wheel-step="1" aria-label="Next Greenfield services">→</button>
@@ -141,7 +139,7 @@ export function GreenfieldWheel() {
 export function BrownfieldStrip() {
   return (
     <section id="brownfield" className="brownfield-photo-section hmt-section" aria-labelledby="brownfield-heading">
-      <h2 id="brownfield-heading" className="sr-only">Brownfield project services</h2>
+      <h2 id="brownfield-heading" className="strip-section-heading">We Support</h2>
       <div className="brownfield-strip-controls">
         <button type="button" data-scroll="brownfield-row:-1" aria-label="Previous Brownfield photos">←</button>
         <button type="button" data-scroll="brownfield-row:1" aria-label="Next Brownfield photos">→</button>
@@ -168,7 +166,7 @@ export function IndustryCinema() {
         <img className="industry-feature-image" id="industry-feature-image" src={asset(industries[0][1])} alt={industries[0][0]} loading="lazy" />
         <div className="industry-cinema-shade" aria-hidden="true" />
         <div className="industry-feature-copy" aria-live="polite">
-          <p>Industries we serve</p>
+          <p>Industries We Serve</p>
           <h2 id="industry-title">{industries[0][0]}</h2>
           <span id="industry-feature-summary">{industries[0][2]}</span>
         </div>

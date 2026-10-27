@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function ScrollHero({ children }) {
+export default function ScrollHero() {
+  const [division, setDivision] = useState('Greenfield');
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const progressRef = useRef(null);
@@ -77,7 +78,20 @@ export default function ScrollHero({ children }) {
           <source src="/assets/hmt/hero-scroll.mp4" type="video/mp4" />
         </video>
         <div className="scroll-hero-shade" aria-hidden="true" />
-        <div className="scroll-hero-copy">{children}</div>
+        <div className="scroll-hero-copy">
+          <div className="hero-division-copy">
+            <p className="hero-brand">Hindustan Machine Tools</p>
+            <div key={division} className="hero-division-writing" aria-live="polite">
+              <h1 id="hero-division-title">{division}</h1>
+              <p className="hero-division-tagline">{division === 'Greenfield'
+                ? 'From bare land to full production, supporting every milestone.'
+                : 'Single machine or full production line — we support with the same care and precision.'}</p>
+            </div>
+            <div className="hero-division-options" role="group" aria-label="Explore our divisions">
+              {['Greenfield', 'Brownfield'].map(name => <button type="button" key={name} aria-pressed={division === name} aria-controls="hero-division-title" onClick={() => setDivision(name)}>{name}<span aria-hidden="true">→</span></button>)}
+            </div>
+          </div>
+        </div>
         <div className="scroll-hero-guide">
           <span>Scroll to explore</span>
           <progress ref={progressRef} max="1" value="0" aria-label="Industrial film progress" />

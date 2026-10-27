@@ -365,7 +365,7 @@
 @media(prefers-reduced-motion:reduce){.process-vector *{animation:none!important;transition:none!important;stroke-dashoffset:0!important}.project-main-image,.project-information{transition:none!important}}
 
 /* Preserve the headings printed into the supplied service posters. */
-.wheel-card:not(:nth-child(12)) img{object-position:center top}
+.wheel-card img{object-position:center top}
 .hmt-site footer.hmt-footer::before{background-image:url('/assets/hmt/client-why-execution.webp');background-position:center 44%}
 
 /* A single route carries the process signal from one illustrated stage to the next. */
@@ -453,3 +453,50 @@
   .brownfield-photo-details h3{font-size:23px}
 }
 @media(max-width:360px){.brownfield-photo:nth-child(11) .brownfield-photo-details h3{font-size:20px}}
+
+/* Client heading, spacing and footer refinements. */
+.hero-division-copy{display:flex;flex-direction:column;align-items:flex-start;max-width:860px}
+.hero-brand{margin:0 0 22px;padding-left:48px;position:relative;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+.hero-brand::before{content:"";position:absolute;left:0;top:50%;width:34px;height:2px;background:var(--accent)}
+.scroll-hero-copy .hero-division-writing h1{font-size:clamp(68px,8vw,138px);line-height:.98;letter-spacing:-.045em;margin:0;color:#fff;font-weight:700}
+.hero-division-tagline{border-left:3px solid var(--accent);padding-left:18px;margin:30px 0 0;max-width:510px;font-size:clamp(18px,1.5vw,24px);line-height:1.45;color:#fff}
+.hero-division-writing{animation:hero-division-in .55s var(--ease)}
+@keyframes hero-division-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero-division-options{display:flex;gap:14px;margin-top:36px}
+.hero-division-options button{display:flex;align-items:center;justify-content:space-between;gap:32px;min-width:210px;padding:18px 24px;border:1px solid #fff;background:#1116;color:#fff;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.hero-division-options button[aria-pressed="true"],.hero-division-options button:hover{background:var(--accent);border-color:var(--accent)}
+.hmt-site .project-showcase{padding-bottom:25px}
+.project-showcase .section-eyebrow{margin-bottom:12px}
+.hmt-site .greenfield-wheel-section{padding-top:0}
+.wheel-controls{padding-top:0;padding-bottom:0}
+.strip-section-heading{margin:0 0 22px;padding:0 var(--pad);font-size:clamp(32px,3.2vw,52px);line-height:1.1;font-weight:700;letter-spacing:-.025em}
+.brownfield-photo-section .strip-section-heading{color:#fff}
+.brownfield-strip-controls{padding-bottom:14px;margin-top:-55px}
+.why-with-stories .strip-section-heading{padding:0;margin-bottom:25px;color:var(--ink)}
+.industry-feature-copy>p{font-size:clamp(19px,1.8vw,28px);letter-spacing:.12em;margin-bottom:22px}
+.hmt-site .process-journey{padding-bottom:24px}
+.hmt-site .contact-desk{padding-top:20px;padding-bottom:35px}
+.hmt-site footer.hmt-footer::before{bottom:0}
+.hmt-site footer.hmt-footer::after{bottom:153px}
+.hmt-site footer.hmt-footer>div.relative.grid{padding-bottom:310px}
+.footer-copyright{position:absolute;z-index:1;left:var(--pad);bottom:280px;margin:0;color:#34332d;font-size:13px!important;line-height:1.4}
+@media(max-width:600px){
+ .hero-brand{font-size:10px;letter-spacing:.16em;padding-left:36px;margin-bottom:20px}
+ .hero-brand::before{width:24px}
+ .scroll-hero-copy .hero-division-writing h1{font-size:clamp(51px,13vw,78px)}
+ .hero-division-tagline{font-size:18px;margin-top:22px;padding-left:13px;max-width:32ch}
+ .hero-division-options{gap:10px;width:100%;margin-top:27px}
+ .hero-division-options button{min-width:0;flex:1;padding:16px 13px;gap:12px;font-size:10px}
+ .hmt-site .project-showcase{padding-bottom:16px}
+ .hmt-site .greenfield-wheel-section{padding-top:0}
+ .brownfield-strip-controls{margin-top:-50px;padding-bottom:16px}
+ .strip-section-heading{font-size:34px;margin-bottom:22px}
+ .industry-feature-copy>p{font-size:20px;line-height:1.25}
+ .hmt-site .process-journey{padding-bottom:20px}
+ .hmt-site .contact-desk{padding-top:18px;padding-bottom:30px}
+ .hmt-site footer.hmt-footer>div.relative.grid{padding-bottom:260px}
+ .hmt-site footer.hmt-footer::before{bottom:0}
+ .hmt-site footer.hmt-footer::after{bottom:105px}
+ .footer-copyright{left:22px;bottom:222px;font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){.hero-division-writing{animation:none}.scroll-hero-copy button{pointer-events:auto}}
